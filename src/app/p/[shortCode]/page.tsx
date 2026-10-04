@@ -21,8 +21,6 @@ import {
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { PublicGallery } from "@/components/public/PublicGallery";
-import { PublicResults } from "@/components/public/PublicResults";
-import { PublicSelection } from "@/components/public/PublicSelection";
 import { ApplicationForm } from "@/components/projects/ApplicationForm";
 import { AppointmentPublicList } from "@/components/appointments/AppointmentPublicList";
 import { ModuleBox } from "@/components/public/ModuleBox";
@@ -133,6 +131,8 @@ export default async function PublicProjectPage({
   // Does the logged-in user have project access (owner/editor/viewer/participant)?
   // This — not merely being logged in — decides whether ratings go through the
   // authenticated path or the guest path.
+  const resultImageCount = await prisma.resultFile.count({ where: { projectId: project.id } });
+
   const userHasAccess = session?.user?.id
     ? await canAccessProject(session.user.id, project.id)
     : false;
@@ -291,7 +291,7 @@ export default async function PublicProjectPage({
                 )}
                 {project.showSelectionPublicly && (
                   <a
-                    href="#selection"
+                    href={`/p/${shortCode}/selection`}
                     className="py-4 text-sm font-medium text-slate-600"
                   >
                     {dict.project.selection}
@@ -299,7 +299,7 @@ export default async function PublicProjectPage({
                 )}
                 {project.showResultsPublicly && (
                   <a
-                    href="#results"
+                    href={`/p/${shortCode}/results`}
                     className="py-4 text-sm font-medium text-slate-600"
                   >
                     {dict.project.results}
@@ -393,7 +393,7 @@ export default async function PublicProjectPage({
                       session
                         ? `/project/${project.id}/selection`
                         : project.showSelectionPublicly
-                          ? "#selection"
+                          ? `/p/${shortCode}/selection`
                           : "#"
                     }
                     disabled={!session && !project.showSelectionPublicly}
@@ -419,15 +419,15 @@ export default async function PublicProjectPage({
                   <ModuleBox
                     title={dict.project.results}
                     icon={<ImageIcon className="h-6 w-6" />}
-                    count={project.resultFolders.length}
-                    label={dict.project.foldersCount
+                    count={resultImageCount}
+                    label={dict.project.imagesCount
                       .replace("{count}", "")
                       .trim()}
                     href={
                       session
                         ? `/project/${project.id}/results`
                         : project.showResultsPublicly
-                          ? "#results"
+                          ? `/p/${shortCode}/results`
                           : "#"
                     }
                     disabled={!session && !project.showResultsPublicly}
@@ -494,23 +494,6 @@ export default async function PublicProjectPage({
                     </Card>
                   ))}
                 </div>
-              </section>
-            )}
-
-            {project.showResultsPublicly && (
-              <section id="results" className="space-y-6 scroll-mt-20">
-                <div className="flex items-center gap-3">
-                  <div
-                    className="rounded-lg bg-slate-100 p-2 text-slate-600"
-                    style={brandColor ? { color: brandColor } : undefined}
-                  >
-                    <ImageIcon className="h-5 w-5" />
-                  </div>
-                  <h2 className="text-2xl font-bold text-gray-900 tracking-tight">
-                    {dict.project.results}
-                  </h2>
-                </div>
-                <PublicResults projectId={project.id} />
               </section>
             )}
 
@@ -583,39 +566,6 @@ export default async function PublicProjectPage({
                       </Card>
                     ))}
                   </div>
-                </section>
-              )}
-
-            {project.showSelectionPublicly &&
-              project.selectionImages.length > 0 && (
-                <section id="selection" className="space-y-6 scroll-mt-20">
-                  <div className="flex items-center gap-3">
-                    <div
-                      className="rounded-lg bg-slate-100 p-2 text-slate-600"
-                      style={brandColor ? { color: brandColor } : undefined}
-                    >
-                      <ImageIcon className="h-5 w-5" />
-                    </div>
-                    <h2 className="text-2xl font-bold text-gray-900 tracking-tight">
-                      {dict.project.selection}
-                    </h2>
-                  </div>
-                  <Card className="overflow-hidden bg-white">
-                    <CardContent className="pt-6">
-                      <PublicSelection
-                        projectId={project.id}
-                        images={project.selectionImages}
-                        folders={project.selectionFolders}
-                        layout={project.galleryLayout as any}
-                        userHasAccess={userHasAccess}
-                        isAuthenticated={!!session?.user?.id}
-                        allowGuestSelection={project.allowGuestSelection}
-                        showFolders={project.showSelectionFolders}
-                        allowDownload={project.allowSelectionDownload}
-                        brandColor={brandColor}
-                      />
-                    </CardContent>
-                  </Card>
                 </section>
               )}
 

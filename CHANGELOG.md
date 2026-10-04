@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.21.0+pottsblitz.20261004] - 2026-10-04
+
+### Changed
+- Adopt upstream 1.21.0 while retaining the Atelier POTTsblitz customizations.
+- Keep separate public selection/results pages, result-file counts, the dashboard storage overview and all accessible projects.
+- Retain per-image deletion and project deletion from dashboard cards, including aborting database deletion when filesystem cleanup fails.
+- Retain the 100 MiB selection upload limit and prevent deletion controls on public results.
+- Patch Next.js to 16.3.8, the Prisma auth adapter to 2.11.3, sharp to 0.35.5 and Nano ID within its existing major version after dependency security review. Prisma remains 6.19.2.
+- Align reported application versions with the package version; use the supported webpack build within the server memory limit.
+- Refresh compatible transitive brace-expansion and browser mapping dependencies.
+- Dashboard project delete controls are shown only for project owners.
+- Deployment preserves the existing PostgreSQL 18 parent mount explicitly through POSTGRES_VOLUME_TARGET; the custom image is pinned and automatic updates remain disabled.
+
 ## [1.21.0] - 2026-10-01
 
 ### Added

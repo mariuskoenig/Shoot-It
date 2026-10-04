@@ -64,6 +64,11 @@
     "openNavigation": "Navigation öffnen"
   },
   "dashboard": {
+    "storageTitle": "Speicherübersicht",
+    "storageTotal": "Gesamter Shoot-It-Speicher",
+    "storageImage": "Datei",
+    "storageImages": "Dateien",
+
     "title": "Dashboard",
     "welcome": "Willkommen zurück",
     "newProject": "Neues Projekt",
@@ -87,6 +92,10 @@
     "resultsReady": "Ergebnisse"
   },
   "project": {
+    "delete": "Projekt löschen",
+    "confirmDelete": "Möchtest du dieses Projekt wirklich löschen? Dabei werden auch alle zugehörigen Bilder und Dateien vom Server gelöscht.",
+    "deleteError": "Das Projekt konnte nicht gelöscht werden.",
+
     "selection": "Auswahl",
     "moodboard": "Moodboard",
     "participants": "Beteiligte",
@@ -175,8 +184,10 @@
     "selectAll": "Alle auswählen",
     "deselectAll": "Auswahl aufheben",
     "confirmDeleteImages": "Bist du sicher, dass du die ausgewählten Bilder löschen möchtest?",
+    "confirmDeleteImage": "Möchtest du dieses Bild wirklich löschen?",
     "confirmDeleteFolder": "Bist du sicher, dass du diesen Ordner und alle darin enthaltenen Bilder löschen möchtest?",
     "deletedSuccess": "Bilder erfolgreich gelöscht",
+    "deletedImageSuccess": "Bild erfolgreich gelöscht",
     "movedSuccess": "Bilder erfolgreich verschoben",
     "folderDeleted": "Ordner gelöscht",
     "moveToRoot": "In Hauptverzeichnis verschieben",

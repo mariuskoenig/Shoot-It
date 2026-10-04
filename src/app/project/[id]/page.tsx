@@ -46,6 +46,7 @@ export default async function ProjectPage({
             contracts: true,
             selectionImages: true,
             resultFolders: true,
+            resultImages: true,
             applications: true,
             appointmentSlots: true,
           },
@@ -125,9 +126,9 @@ export default async function ProjectPage({
     ],
     [
       dict.project.results,
-      dict.project.foldersCount.replace(
+      dict.project.imagesCount.replace(
         "{count}",
-        String(project._count.resultFolders),
+        String(project._count.resultImages),
       ),
       `/project/${id}/results`,
       FolderKanban,

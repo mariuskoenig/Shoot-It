@@ -39,7 +39,7 @@ export function ResultImageGrid({
   images: ResultFile[];
   selectedIds: Set<string>;
   onToggleSelect: (id: string) => void;
-  onDelete: (id: string) => void;
+  onDelete?: (id: string) => void;
   showDelete?: boolean;
   projectId: string;
   layout?: string;
@@ -79,9 +79,9 @@ export function ResultImageGrid({
               >
                 <Eye className="h-4 w-4" />
               </button>
-              {showDelete && (
+              {showDelete && onDelete && (
                 <button
-                  onClick={() => onDelete(image.id)}
+                  onClick={() => onDelete?.(image.id)}
                   aria-label={t("common.delete")}
                   className="text-slate-400 hover:text-red-600"
                 >
@@ -104,7 +104,7 @@ export function ResultImageGrid({
                 onInspect ? onInspect(image.id) : setIndex(i)
               }
               onPreview={() => setIndex(i)}
-              onDelete={showDelete ? () => onDelete(image.id) : undefined}
+              onDelete={showDelete && onDelete ? () => onDelete?.(image.id) : undefined}
               selected={selectedIds.has(image.id)}
               onSelect={() => onToggleSelect(image.id)}
               hideRatings={true}
@@ -137,7 +137,7 @@ export function ResultImageGrid({
                     onInspect ? onInspect(image.id) : setIndex(i)
                   }
                   onPreview={() => setIndex(i)}
-                  onDelete={showDelete ? () => onDelete(image.id) : undefined}
+                  onDelete={showDelete && onDelete ? () => onDelete?.(image.id) : undefined}
                   justified={true}
                   selected={selectedIds.has(image.id)}
                   onSelect={() => onToggleSelect(image.id)}
@@ -162,7 +162,7 @@ export function ResultImageGrid({
                 onInspect ? onInspect(image.id) : setIndex(i)
               }
               onPreview={() => setIndex(i)}
-              onDelete={showDelete ? () => onDelete(image.id) : undefined}
+              onDelete={showDelete && onDelete ? () => onDelete?.(image.id) : undefined}
               masonry
               selected={selectedIds.has(image.id)}
               onSelect={() => onToggleSelect(image.id)}

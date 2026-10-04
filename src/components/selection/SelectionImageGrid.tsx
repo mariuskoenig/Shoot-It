@@ -10,6 +10,7 @@ interface SelectionImageGridProps {
   onRatingUpdated: () => void;
   selectedIds?: Set<string>;
   onToggleSelect?: (id: string | string[]) => void;
+  onDelete?: (id: string) => void;
 }
 
 export function SelectionImageGrid({
@@ -20,6 +21,7 @@ export function SelectionImageGrid({
   onRatingUpdated,
   selectedIds,
   onToggleSelect,
+  onDelete,
 }: SelectionImageGridProps) {
   if (images.length === 0) return null;
 
@@ -31,6 +33,7 @@ export function SelectionImageGrid({
             key={image.id}
             image={image}
             projectId={projectId}
+            onDelete={onDelete ? () => onDelete(image.id) : undefined}
             onRatingUpdated={onRatingUpdated}
             onImageClick={() => onImageClick(i)}
             selected={selectedIds?.has(image.id)}
@@ -63,6 +66,7 @@ export function SelectionImageGrid({
               <ImageCard
                 image={image}
                 projectId={projectId}
+                onDelete={onDelete ? () => onDelete(image.id) : undefined}
                 onRatingUpdated={onRatingUpdated}
                 onImageClick={() => onImageClick(i)}
                 justified={true}
@@ -87,6 +91,7 @@ export function SelectionImageGrid({
           <ImageCard
             image={image}
             projectId={projectId}
+            onDelete={onDelete ? () => onDelete(image.id) : undefined}
             onRatingUpdated={onRatingUpdated}
             onImageClick={() => onImageClick(index)}
             masonry

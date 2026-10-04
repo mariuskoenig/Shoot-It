@@ -145,6 +145,25 @@ export function SelectionContent({
     setSelectedImageIds(newSelected);
   };
 
+  const handleDeleteImage = async (imageId: string) => {
+    if (!confirm(t('selection.confirmDeleteImage'))) return
+
+    try {
+      const res = await fetch(`/api/projects/${projectId}/selection/images/bulk`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ imageIds: [imageId] })
+      })
+
+      if (!res.ok) throw new Error()
+
+      toast.success(t('selection.deletedImageSuccess'))
+      router.refresh()
+    } catch (error) {
+      toast.error(t('common.error'))
+    }
+  }
+
   const handleDeleteSelected = async () => {
     if (!selectedImageIds.size || !confirm(t("selection.confirmDeleteImages")))
       return;
@@ -421,6 +440,7 @@ export function SelectionContent({
                 layout={view}
                 selectedIds={selectedImageIds}
                 onToggleSelect={handleToggleImage}
+                onDelete={handleDeleteImage}
                 onImageClick={(i) => setIndex(i)}
                 onRatingUpdated={handleRatingUpdated}
               />
