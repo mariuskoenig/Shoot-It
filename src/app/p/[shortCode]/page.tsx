@@ -1,3 +1,4 @@
+import { imagePreviewSource } from "@/lib/image-preview"
 import { getParticipantPortrait } from "@/lib/participant-portrait";
 import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
@@ -208,7 +209,7 @@ export default async function PublicProjectPage({
                 <img
                   src={brandingImage}
                   alt=""
-                  className="h-full w-full object-cover"
+                  className="h-auto w-full object-contain"
                 />
               </div>
               <div className="flex flex-col gap-6 border-b border-slate-200 bg-white px-5 py-6 sm:flex-row sm:items-end sm:justify-between sm:px-8">
@@ -327,12 +328,12 @@ export default async function PublicProjectPage({
                       key={image.id}
                       href="#moodboard"
                       aria-label={dict.project.moodboard}
-                      className="aspect-[4/3] overflow-hidden rounded-lg"
+                      className="overflow-hidden rounded-lg bg-slate-100"
                     >
                       <img
-                        src={image.thumbnail || image.path}
+                        src={imagePreviewSource(image)}
                         alt={image.filename}
-                        className="h-full w-full object-cover"
+                        className="h-auto w-full object-contain"
                       />
                     </a>
                   ))}

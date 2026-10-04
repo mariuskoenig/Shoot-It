@@ -1,6 +1,6 @@
 {
   "name": "photoshoot-organizer",
-  "version": "1.21.0+pottsblitz.20261004",
+  "version": "1.21.1+pottsblitz.20261004",
   "private": true,
   "scripts": {
     "devdb": "docker compose up -d db && next dev --turbopack",

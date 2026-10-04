@@ -1,5 +1,7 @@
 "use client";
 
+import { imagePreviewSource } from "@/lib/image-preview";
+
 import { useI18n } from "@/components/I18nProvider";
 import { Button } from "@/components/ui/button";
 import {
@@ -64,11 +66,9 @@ function formatDuration(seconds: number): string {
 function MoodboardMedia({
   image,
   className,
-  useFullForImage,
 }: {
   image: MoodboardImage;
   className: string;
-  useFullForImage?: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -82,7 +82,7 @@ function MoodboardMedia({
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="none"
           className={className}
           draggable={false}
           onMouseEnter={() => videoRef.current?.play().catch(() => {})}
@@ -110,7 +110,7 @@ function MoodboardMedia({
 
   return (
     <img
-      src={useFullForImage ? image.path : image.thumbnail || image.path}
+      src={imagePreviewSource(image)}
       alt={image.filename}
       className={className}
     />
@@ -498,7 +498,7 @@ export function MoodboardGroup({
                       image={image}
                       className={
                         galleryLayout === "grid"
-                          ? "aspect-[4/5] w-full object-cover"
+                          ? "h-auto w-full object-contain"
                           : "h-auto w-full"
                       }
                     />
@@ -661,6 +661,7 @@ export function MoodboardGroup({
         index={index}
         open={index >= 0}
         close={() => setIndex(-1)}
+        carousel={{ preload: 0 }}
         plugins={[Video]}
         slides={group.images.map((img) =>
           img.isVideo
@@ -671,7 +672,7 @@ export function MoodboardGroup({
                 height: img.height || undefined,
                 sources: [{ src: img.path, type: videoMimeFor(img.path) }],
               }
-            : { src: img.path },
+            : { src: imagePreviewSource(img) },
         )}
       />
     </div>

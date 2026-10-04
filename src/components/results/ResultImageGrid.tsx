@@ -1,5 +1,7 @@
 "use client";
 
+import { imagePreviewSource } from "@/lib/image-preview";
+
 import { useI18n } from "@/components/I18nProvider";
 import { Eye, Trash2 } from "lucide-react";
 import { useState } from "react";
@@ -67,9 +69,9 @@ export function ResultImageGrid({
                 className="flex min-w-0 flex-1 items-center gap-3 text-left"
               >
                 <img
-                  src={image.thumbnail || image.path}
+                  src={imagePreviewSource(image)}
                   alt=""
-                  className="h-12 w-16 rounded object-cover"
+                  className="h-12 w-16 rounded object-contain"
                 />
                 <span className="truncate text-sm">{image.filename}</span>
               </button>
@@ -187,6 +189,7 @@ export function ResultImageGrid({
         index={index}
         open={index >= 0}
         close={() => setIndex(-1)}
+        carousel={{ preload: 0 }}
         plugins={[Video]}
         slides={images.map((img) =>
           img.isVideo
@@ -200,7 +203,7 @@ export function ResultImageGrid({
                 title: img.filename,
               }
             : {
-                src: img.path,
+                src: imagePreviewSource(img),
                 downloadUrl: img.path,
                 title: img.filename,
               },

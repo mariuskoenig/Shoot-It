@@ -1,5 +1,7 @@
 "use client"
 
+import { imagePreviewSource } from "@/lib/image-preview"
+
 import { useState, useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
 import { X, ChevronLeft, ChevronRight, ZoomIn, Play } from "lucide-react"
@@ -61,7 +63,7 @@ function PublicMedia({ image, className }: { image: Image; className: string }) 
 
     return (
         <img
-            src={image.thumbnail || image.path}
+            src={imagePreviewSource(image)}
             alt={image.filename}
             loading="lazy"
             decoding="async"
@@ -105,7 +107,6 @@ export function PublicGallery({
         return () => window.removeEventListener("keydown", handleKeyDown)
     }, [selectedIndex])
 
-    const aspectClass = aspectRatio === "square" ? "aspect-square" : "aspect-[2/3]"
 
     const openLightbox = (index: number) => {
         setSelectedIndex(index)
@@ -190,7 +191,7 @@ export function PublicGallery({
                     />
                 ) : (
                     <img
-                        src={images[selectedIndex].path}
+                        src={imagePreviewSource(images[selectedIndex])}
                         alt={images[selectedIndex].filename}
                         className="max-w-full max-h-full object-contain shadow-2xl rounded-lg animate-in zoom-in-95 duration-500"
                     />
@@ -207,12 +208,12 @@ export function PublicGallery({
                     {images.map((image, index) => (
                         <div
                             key={image.id}
-                            className={`${aspectClass} relative rounded-xl overflow-hidden group cursor-pointer shadow-sm hover:shadow-md transition-all border border-gray-100 bg-gray-50`}
+                            className={`relative rounded-xl overflow-hidden group cursor-pointer shadow-sm hover:shadow-md transition-all border border-gray-100 bg-gray-50`}
                             onClick={() => openLightbox(index)}
                         >
                             <PublicMedia
                                 image={image}
-                                className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+                                className="object-contain w-full h-auto"
                             />
                             <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <ZoomIn className="text-white h-8 w-8" />
@@ -230,7 +231,7 @@ export function PublicGallery({
                         >
                             <PublicMedia
                                 image={image}
-                                className="w-full h-auto transition-transform duration-500 group-hover:scale-110 block"
+                                className="w-full h-auto block"
                             />
                             <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <ZoomIn className="text-white h-8 w-8" />
@@ -260,7 +261,7 @@ export function PublicGallery({
                             >
                                 <PublicMedia
                                     image={image}
-                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 block"
+                                    className="w-full h-full object-contain block"
                                 />
                                 <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                     <ZoomIn className="text-white h-8 w-8" />
@@ -284,7 +285,7 @@ export function PublicGallery({
                                 >
                                     <PublicMedia
                                         image={image}
-                                        className="w-full h-auto transition-transform duration-500 group-hover:scale-110 block"
+                                        className="w-full h-auto block"
                                     />
                                     <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                         <ZoomIn className="text-white h-8 w-8" />

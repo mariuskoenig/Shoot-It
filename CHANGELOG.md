@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.21.1+pottsblitz.20261004] - 2026-10-04
+
+### Fixed
+- Preserve complete portrait and landscape images in selection, result and moodboard galleries, including public views and inspector previews; remove cropping hover zoom.
+- Reuse the single existing proportional WebP preview (maximum 2560 px) in thumbnails, inspectors and lightboxes, without additional derivatives or rewriting existing files.
+- Preserve EXIF orientation for future uploads and create the same canonical preview during local-media import.
+- Keep original files for downloads and video playback; load only the current lightbox image.
+- Avoid overlapping modal focus managers when opening a lightbox from an image menu; restore gallery accessibility after closing.
+
 ## [1.21.0+pottsblitz.20261004] - 2026-10-04
 
 ### Changed

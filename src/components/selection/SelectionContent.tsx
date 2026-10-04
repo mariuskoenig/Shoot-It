@@ -1,5 +1,7 @@
 "use client";
 
+import { imagePreviewSource } from "@/lib/image-preview";
+
 import { useI18n } from "@/components/I18nProvider";
 import { Button } from "@/components/ui/button";
 import {
@@ -561,8 +563,9 @@ export function SelectionContent({
         index={index}
         open={index >= 0}
         close={() => setIndex(-1)}
+        carousel={{ preload: 0 }}
         slides={filteredImages.map((img) => ({
-          src: img.path,
+          src: imagePreviewSource(img),
           image: img,
         }))}
         render={{

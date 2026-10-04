@@ -1,5 +1,7 @@
 "use client"
 
+import { imagePreviewSource } from "@/lib/image-preview"
+
 import { useState, useEffect } from "react"
 import { createPortal } from "react-dom"
 import { useRouter } from "next/navigation"
@@ -305,7 +307,7 @@ export function PublicSelection({
           onClick={(e) => e.stopPropagation()}
         >
           <img
-            src={filteredImages[selectedIndex].path}
+            src={imagePreviewSource(filteredImages[selectedIndex])}
             alt={filteredImages[selectedIndex].filename}
             className="max-w-full max-h-full object-contain shadow-2xl rounded-lg animate-in zoom-in-95 duration-500"
           />

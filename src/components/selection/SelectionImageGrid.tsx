@@ -36,6 +36,7 @@ export function SelectionImageGrid({
             onDelete={onDelete ? () => onDelete(image.id) : undefined}
             onRatingUpdated={onRatingUpdated}
             onImageClick={() => onImageClick(i)}
+            onPreview={() => onImageClick(i)}
             selected={selectedIds?.has(image.id)}
             onSelect={
               onToggleSelect ? () => onToggleSelect(image.id) : undefined
@@ -69,6 +70,7 @@ export function SelectionImageGrid({
                 onDelete={onDelete ? () => onDelete(image.id) : undefined}
                 onRatingUpdated={onRatingUpdated}
                 onImageClick={() => onImageClick(i)}
+            onPreview={() => onImageClick(i)}
                 justified={true}
                 selected={selectedIds?.has(image.id)}
                 onSelect={
@@ -94,6 +96,7 @@ export function SelectionImageGrid({
             onDelete={onDelete ? () => onDelete(image.id) : undefined}
             onRatingUpdated={onRatingUpdated}
             onImageClick={() => onImageClick(index)}
+            onPreview={() => onImageClick(index)}
             masonry
             selected={selectedIds?.has(image.id)}
             onSelect={

@@ -1,5 +1,7 @@
 "use client";
 
+import { imagePreviewSource } from "@/lib/image-preview";
+
 import { useI18n } from "@/components/I18nProvider";
 import { Button } from "@/components/ui/button";
 import {
@@ -402,9 +404,9 @@ export function ResultsContent({
                   />
                 ) : (
                   <img
-                    src={detail.thumbnail || detail.path}
+                    src={imagePreviewSource(detail)}
                     alt={detail.filename}
-                    className="mb-3 aspect-[4/3] w-full rounded-md object-cover"
+                    className="mb-3 h-auto max-h-96 w-full rounded-md object-contain"
                   />
                 )}
                 <p className="break-words text-sm font-semibold">
