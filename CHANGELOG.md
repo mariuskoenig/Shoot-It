@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.21.2+pottsblitz.20261005] - 2026-10-05
+
+### Added
+- Add a visible Download link inside image previews on iPhone and iPad, including iPadOS desktop mode. It opens the original inline for native saving and respects public selection download permissions.
+- Keep result file details available in the image actions menu and list view.
+
+### Fixed
+- Use compact responsive thumbnail grids and masonry columns; bound photo height while containing the complete frame, including public project overview thumbnails.
+- Open public overview thumbnails in the preview instead of only scrolling to the moodboard.
+- Delay browser-only direct-download detection until mount to avoid mismatched server/client markup in public selections.
+- Reuse an existing valid session on the home and login pages and redirect signed-in users to their dashboard or a safe local return path; keep the existing cookie/session policy.
+- Hide internal build metadata in the visible footer and workspace version; retain the complete internal identifier for support and rollback.
+- Open the image preview directly when clicking result thumbnails in all gallery layouts.
+- Follow the currently displayed image when opening its original after lightbox navigation; continue reusing existing upload previews without additional derivatives.
+
 ## [1.21.1+pottsblitz.20261004] - 2026-10-04
 
 ### Fixed

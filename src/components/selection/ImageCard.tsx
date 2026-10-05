@@ -60,6 +60,7 @@ interface ImageCardProps {
   forceSelectable?: boolean;
   onDelete?: () => void;
   onPreview?: () => void;
+  onDetails?: () => void;
 }
 
 export function ImageCard({
@@ -78,6 +79,7 @@ export function ImageCard({
   forceSelectable,
   onDelete,
   onPreview,
+  onDetails,
 }: ImageCardProps) {
   const { t } = useI18n();
   const currentRating = image.ratings;
@@ -129,7 +131,7 @@ export function ImageCard({
         </button>
       )}
 
-      {(onDelete || onPreview) && (
+      {(onDelete || onPreview || onDetails) && (
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <button
@@ -144,6 +146,11 @@ export function ImageCard({
               <DropdownMenuItem onSelect={onPreview}>
                 <Eye className="mr-2 h-4 w-4" />
                 {t("design.preview")}
+              </DropdownMenuItem>
+            )}
+            {onDetails && (
+              <DropdownMenuItem onSelect={onDetails}>
+                {t("design.fileDetails")}
               </DropdownMenuItem>
             )}
             <DropdownMenuItem asChild>
@@ -186,7 +193,7 @@ export function ImageCard({
             onImageClick?.();
           }
         }}
-        className={`${justified ? "h-[240px]" : ""} bg-gray-100 relative overflow-hidden cursor-zoom-in group flex-shrink-0`}
+        className={`shootit-gallery-media ${justified ? "h-[240px]" : ""} bg-gray-100 relative overflow-hidden cursor-zoom-in group flex-shrink-0`}
         onClick={onImageClick}
         onMouseEnter={image.isVideo ? handleMouseEnter : undefined}
         onMouseLeave={image.isVideo ? handleMouseLeave : undefined}

@@ -1,5 +1,7 @@
 "use client";
 
+import { LightboxOriginalImageButton } from "@/components/LightboxOriginalImageButton";
+
 import { imagePreviewSource } from "@/lib/image-preview";
 
 import { useI18n } from "@/components/I18nProvider";
@@ -563,6 +565,7 @@ export function SelectionContent({
         index={index}
         open={index >= 0}
         close={() => setIndex(-1)}
+        toolbar={{ buttons: [<LightboxOriginalImageButton key="original" images={filteredImages} />, "close"] }}
         carousel={{ preload: 0 }}
         slides={filteredImages.map((img) => ({
           src: imagePreviewSource(img),

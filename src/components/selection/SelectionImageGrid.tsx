@@ -27,7 +27,7 @@ export function SelectionImageGrid({
 
   if (layout === "grid") {
     return (
-      <div className="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
+      <div className="shootit-gallery-grid">
         {images.map((image, i) => (
           <ImageCard
             key={image.id}
@@ -50,7 +50,7 @@ export function SelectionImageGrid({
 
   if (layout === "justified") {
     return (
-      <div className="flex flex-wrap gap-4">
+      <div className="shootit-gallery-justified">
         {images.map((image, i) => {
           const width = image.width || 400;
           const height = image.height || 300;
@@ -58,10 +58,10 @@ export function SelectionImageGrid({
           return (
             <div
               key={image.id}
-              className="relative group h-[340px]"
+              className="shootit-gallery-item relative group"
               style={{
                 flexGrow: aspect * 100,
-                flexBasis: `${aspect * 240}px`,
+                flexBasis: `${aspect * 180}px`,
               }}
             >
               <ImageCard
@@ -87,7 +87,7 @@ export function SelectionImageGrid({
   }
 
   return (
-    <div className="columns-2 gap-3 xl:columns-3 2xl:columns-4">
+    <div className="shootit-gallery-masonry">
       {images.map((image, index) => (
         <div key={image.id} className="mb-3 break-inside-avoid">
           <ImageCard

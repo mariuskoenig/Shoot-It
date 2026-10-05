@@ -322,21 +322,8 @@ export default async function PublicProjectPage({
               className="scroll-mt-6 overflow-hidden bg-white"
             >
               {overviewImages.length > 0 && (
-                <div className="grid grid-cols-3 gap-2 p-4 pb-0">
-                  {overviewImages.map((image: any) => (
-                    <a
-                      key={image.id}
-                      href="#moodboard"
-                      aria-label={dict.project.moodboard}
-                      className="overflow-hidden rounded-lg bg-slate-100"
-                    >
-                      <img
-                        src={imagePreviewSource(image)}
-                        alt={image.filename}
-                        className="h-auto w-full object-contain"
-                      />
-                    </a>
-                  ))}
+                <div className="shootit-gallery-overview p-4 pb-0">
+                  <PublicGallery images={overviewImages} layout="grid" />
                 </div>
               )}
               <CardHeader className="pb-0">

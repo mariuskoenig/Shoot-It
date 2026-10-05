@@ -1,5 +1,7 @@
 "use client";
 
+import { LightboxOriginalImageButton } from "@/components/LightboxOriginalImageButton";
+
 import { imagePreviewSource } from "@/lib/image-preview";
 
 import { useI18n } from "@/components/I18nProvider";
@@ -112,6 +114,8 @@ function MoodboardMedia({
     <img
       src={imagePreviewSource(image)}
       alt={image.filename}
+      loading="lazy"
+      decoding="async"
       className={className}
     />
   );
@@ -480,8 +484,8 @@ export function MoodboardGroup({
             <div
               className={
                 galleryLayout === "grid"
-                  ? "grid grid-cols-2 gap-2 2xl:grid-cols-3"
-                  : "columns-2 gap-2 2xl:columns-3"
+                  ? "shootit-gallery-grid"
+                  : "shootit-gallery-masonry"
               }
             >
               {group.images.map((image, i) => (
@@ -490,7 +494,7 @@ export function MoodboardGroup({
                   className={`group relative mb-2 break-inside-avoid overflow-hidden rounded-lg ${selectedImageIds.includes(image.id) ? "ring-2 ring-blue-600" : ""}`}
                 >
                   <button
-                    className="block w-full"
+                    className="shootit-gallery-media block w-full"
                     onClick={() => setIndex(i)}
                     aria-label={`${t("design.preview")}: ${image.filename}`}
                   >
@@ -661,6 +665,7 @@ export function MoodboardGroup({
         index={index}
         open={index >= 0}
         close={() => setIndex(-1)}
+        toolbar={{ buttons: [<LightboxOriginalImageButton key="original" images={group.images} />, "close"] }}
         carousel={{ preload: 0 }}
         plugins={[Video]}
         slides={group.images.map((img) =>

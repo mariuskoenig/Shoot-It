@@ -1,5 +1,7 @@
 "use client";
 
+import { LightboxOriginalImageButton } from "@/components/LightboxOriginalImageButton";
+
 import { imagePreviewSource } from "@/lib/image-preview";
 
 import { useI18n } from "@/components/I18nProvider";
@@ -65,7 +67,7 @@ export function ResultImageGrid({
                 onChange={() => onToggleSelect(image.id)}
               />
               <button
-                onClick={() => (onInspect ? onInspect(image.id) : setIndex(i))}
+                onClick={() => setIndex(i)}
                 className="flex min-w-0 flex-1 items-center gap-3 text-left"
               >
                 <img
@@ -81,6 +83,11 @@ export function ResultImageGrid({
               >
                 <Eye className="h-4 w-4" />
               </button>
+              {onInspect && (
+                <button onClick={() => onInspect(image.id)} aria-label={t("design.fileDetails")} className="text-sm">
+                  {t("common.details")}
+                </button>
+              )}
               {showDelete && onDelete && (
                 <button
                   onClick={() => onDelete?.(image.id)}
@@ -96,16 +103,15 @@ export function ResultImageGrid({
       );
     if (layout === "grid") {
       return (
-        <div className="grid grid-cols-2 gap-3 2xl:grid-cols-3">
+        <div className="shootit-gallery-grid">
           {images.map((image, i) => (
             <ImageCard
               key={image.id}
               image={{ ...image, ratings: null }}
               projectId={projectId}
-              onImageClick={() =>
-                onInspect ? onInspect(image.id) : setIndex(i)
-              }
+              onImageClick={() => setIndex(i)}
               onPreview={() => setIndex(i)}
+              onDetails={onInspect ? () => onInspect(image.id) : undefined}
               onDelete={showDelete && onDelete ? () => onDelete?.(image.id) : undefined}
               selected={selectedIds.has(image.id)}
               onSelect={() => onToggleSelect(image.id)}
@@ -118,7 +124,7 @@ export function ResultImageGrid({
 
     if (layout === "justified") {
       return (
-        <div className="flex flex-wrap gap-4">
+        <div className="shootit-gallery-justified">
           {images.map((image, i) => {
             const width = image.width || 400;
             const height = image.height || 300;
@@ -126,19 +132,18 @@ export function ResultImageGrid({
             return (
               <div
                 key={image.id}
-                className="relative group h-[240px]"
+                className="shootit-gallery-item relative group"
                 style={{
                   flexGrow: aspect * 100,
-                  flexBasis: `${aspect * 240}px`,
+                  flexBasis: `${aspect * 180}px`,
                 }}
               >
                 <ImageCard
                   image={{ ...image, ratings: null }}
                   projectId={projectId}
-                  onImageClick={() =>
-                    onInspect ? onInspect(image.id) : setIndex(i)
-                  }
+                  onImageClick={() => setIndex(i)}
                   onPreview={() => setIndex(i)}
+              onDetails={onInspect ? () => onInspect(image.id) : undefined}
                   onDelete={showDelete && onDelete ? () => onDelete?.(image.id) : undefined}
                   justified={true}
                   selected={selectedIds.has(image.id)}
@@ -154,16 +159,15 @@ export function ResultImageGrid({
     }
 
     return (
-      <div className="columns-2 gap-3 2xl:columns-3">
+      <div className="shootit-gallery-masonry">
         {images.map((image, i) => (
           <div key={image.id} className="mb-3 break-inside-avoid">
             <ImageCard
               image={{ ...image, ratings: null }}
               projectId={projectId}
-              onImageClick={() =>
-                onInspect ? onInspect(image.id) : setIndex(i)
-              }
+              onImageClick={() => setIndex(i)}
               onPreview={() => setIndex(i)}
+              onDetails={onInspect ? () => onInspect(image.id) : undefined}
               onDelete={showDelete && onDelete ? () => onDelete?.(image.id) : undefined}
               masonry
               selected={selectedIds.has(image.id)}
@@ -189,6 +193,7 @@ export function ResultImageGrid({
         index={index}
         open={index >= 0}
         close={() => setIndex(-1)}
+        toolbar={{ buttons: [<LightboxOriginalImageButton key="original" images={images} />, "close"] }}
         carousel={{ preload: 0 }}
         plugins={[Video]}
         slides={images.map((img) =>
