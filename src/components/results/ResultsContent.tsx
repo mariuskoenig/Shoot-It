@@ -62,11 +62,13 @@ type ResultFolder = {
 
 export function ResultsContent({
   projectId,
+  isOwner = false,
   initialFolders: folders,
   rootImages = [],
   layout = "grid",
 }: {
   projectId: string;
+  isOwner?: boolean;
   initialFolders: ResultFolder[];
   rootImages?: ResultFile[];
   layout?: string;
@@ -84,6 +86,7 @@ export function ResultsContent({
     layout === "justified" ? "justified" : "grid",
   );
   const [sort, setSort] = useState("newest");
+  const [isDeleting, setIsDeleting] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadMode, setDownloadMode] = useState<"zip" | "files">("zip");
   const allImages = useMemo(
@@ -190,6 +193,19 @@ export function ResultsContent({
     } catch {
       toast.error(t("common.error"));
     }
+  };
+  const deleteSelected = async () => {
+    if (isDeleting || !selectedImageIds.size || !confirm(t("coverControls.confirmDeleteSelected").replace("{count}", String(selectedImageIds.size)))) return;
+    setIsDeleting(true);
+    try {
+      const response = await fetch(`/api/projects/${projectId}/results/images/bulk`, {
+        method: "DELETE", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ imageIds: [...selectedImageIds] }),
+      });
+      if (!response.ok) throw new Error();
+      setSelectedImageIds(new Set()); setDetailId(null); router.refresh();
+    } catch { toast.error(t("common.error")); }
+    finally { setIsDeleting(false); }
   };
   const uploadUrl = currentFolder
     ? `/api/projects/${projectId}/results/folders/${currentFolder.id}/images`
@@ -483,9 +499,13 @@ export function ResultsContent({
               >
                 {t("selection.download")}
               </Button>
+              {isOwner && <Button variant="outline" size="sm" className="gap-2 text-red-600" disabled={isDeleting} onClick={deleteSelected}>
+                <Trash2 className="h-4 w-4" />{isDeleting ? t("common.loading") : t("coverControls.deleteSelected")}
+              </Button>}
               <Button
                 variant="outline"
                 size="sm"
+                disabled={isDeleting}
                 onClick={() => setSelectedImageIds(new Set())}
               >
                 {t("results.deselectAll")}

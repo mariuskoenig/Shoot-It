@@ -77,7 +77,7 @@ export default async function ProjectPage({
   if (!project) redirect("/dashboard");
   const projectDate = project.date ? new Date(project.date) : null;
   const isOwner = project.ownerId === session.user.id;
-  const hero =
+  const hero = project.coverHidden ? null :
     project.brandingImage ||
     project.moodboardLinks[0]?.group.images[0]?.thumbnail ||
     project.moodboardLinks[0]?.group.images[0]?.path;
@@ -172,12 +172,12 @@ export default async function ProjectPage({
             )}
           </div>
         </div>
-        {isOwner && <ProjectActions project={project} />}
+        {isOwner && <ProjectActions project={{ ...project, brandingImage: hero ?? null }} />}
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_330px]">
         <div className="min-w-0 space-y-4">
-          <ProjectCover projectId={id} image={hero} editable={isOwner} />
+          <ProjectCover projectId={id} image={hero} editable={isOwner} positionX={project.coverPositionX} positionY={project.coverPositionY} />
           <section aria-label={dict.project.projectModules}>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {modules.map(([title, subtitle, href, Icon]) => (

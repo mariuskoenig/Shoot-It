@@ -16,6 +16,8 @@ export interface DashboardProject {
   location: string | null
   shortCode: string
   isArchived: boolean
+  coverPositionX: number
+  coverPositionY: number
   previewImage: string | null
   participantCount: number
   selectionCount: number

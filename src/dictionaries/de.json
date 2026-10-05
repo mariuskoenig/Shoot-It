@@ -68,7 +68,6 @@
     "storageTotal": "Gesamter Shoot-It-Speicher",
     "storageImage": "Datei",
     "storageImages": "Dateien",
-
     "title": "Dashboard",
     "welcome": "Willkommen zurück",
     "newProject": "Neues Projekt",
@@ -95,7 +94,6 @@
     "delete": "Projekt löschen",
     "confirmDelete": "Möchtest du dieses Projekt wirklich löschen? Dabei werden auch alle zugehörigen Bilder und Dateien vom Server gelöscht.",
     "deleteError": "Das Projekt konnte nicht gelöscht werden.",
-
     "selection": "Auswahl",
     "moodboard": "Moodboard",
     "participants": "Beteiligte",
@@ -247,7 +245,6 @@
     "imageHelp": "Bild bis 5 MB hochladen. Es wird für dieses Projekt gespeichert und bei öffentlich sichtbaren Beteiligten auch auf der Projektseite angezeigt.",
     "profileImagePriority": "Das eigene Profilbild dieser Person hat Vorrang. Dein Upload dient als Ersatz, falls kein Profilbild hinterlegt ist.",
     "imageSaved": "Beteiligtenbild gespeichert.",
-
     "title": "Beteiligte",
     "noParticipants": "Noch keine Beteiligten vorhanden",
     "participantsPrompt": "Füge Beteiligte hinzu, um dein Shooting zu organisieren",
@@ -641,5 +638,16 @@
     "useCover": "Als Titelbild verwenden",
     "previous": "Zurück",
     "next": "Weiter"
-}
+  },
+  "coverControls": {
+    "remove": "Titelbild entfernen",
+    "removeConfirm": "Titelbild entfernen? Die Bilder in deinen Galerien bleiben erhalten.",
+    "position": "Bildausschnitt verschieben",
+    "horizontal": "Horizontal",
+    "vertical": "Vertikal",
+    "save": "Bildausschnitt speichern",
+    "help": "Verschiebe das Bild mit Maus oder Finger, oder verwende die Regler.",
+    "deleteSelected": "Ausgewählte löschen",
+    "confirmDeleteSelected": "{count} ausgewählte Bilder endgültig löschen? Originale und Vorschaubilder werden entfernt."
+  }
 }

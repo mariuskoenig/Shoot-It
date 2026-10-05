@@ -116,7 +116,7 @@ export default async function PublicSelectionPage({
                 <div className="absolute inset-0 bg-gradient-to-br from-black/20 to-black/60 z-10" />
                 <div
                     className="absolute inset-0 bg-cover bg-center opacity-30"
-                    style={{ backgroundImage: `url('${project.brandingImage || project.owner.brandingImage || ""}')` }}
+                    style={{ backgroundImage: project.coverHidden ? undefined : `url('${project.brandingImage || project.owner.brandingImage || ""}')`, backgroundPosition: `${project.coverPositionX}% ${project.coverPositionY}%` }}
                 />
 
                 <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-end pb-6">

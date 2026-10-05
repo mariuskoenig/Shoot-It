@@ -35,7 +35,7 @@ export function ProjectCard({ project }: { project: DashboardProject }) {
   }
   return <Link href={`/project/${project.id}`} className="group overflow-hidden rounded-xl border border-[#e2e5ea] bg-white transition-colors hover:border-slate-300">
     <div className="relative aspect-[16/7] overflow-hidden bg-[#d9dde3]">
-      {project.previewImage ? <img src={project.previewImage} alt="" className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" /> : <div className="h-full w-full bg-[linear-gradient(135deg,#d8dde5,#eef0f3_55%,#cbd2db)]" />}
+      {project.previewImage ? <img src={project.previewImage} style={{ objectPosition: `${project.coverPositionX}% ${project.coverPositionY}%` }} alt="" className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" /> : <div className="h-full w-full bg-[linear-gradient(135deg,#d8dde5,#eef0f3_55%,#cbd2db)]" />}
       <span className="absolute left-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-xs font-medium text-slate-700"><span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-blue-600" />{status}</span>
       <div className="absolute right-3 top-3 flex gap-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100">
         <Button variant="secondary" size="icon" onClick={toggleArchive} disabled={updating} title={project.isArchived ? t("common.unarchive") : t("common.archive")} className="h-9 w-9 rounded-full bg-white/95">{project.isArchived ? <ArchiveRestore /> : <Archive />}</Button>

@@ -166,7 +166,7 @@ export default async function PublicProjectPage({
   }
 
   const projectDate = project.date ? new Date(project.date) : null;
-  const brandingImage =
+  const brandingImage = project.coverHidden ? null :
     project.brandingImage ||
     project.owner.brandingImage ||
     "/images/design/coastal-editorial.webp";
@@ -206,11 +206,12 @@ export default async function PublicProjectPage({
           <div className="min-w-0 space-y-8">
             <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
               <div className="h-52 overflow-hidden bg-slate-200 sm:h-72">
-                <img
+                {brandingImage && <img
                   src={brandingImage}
                   alt=""
-                  className="h-auto w-full object-contain"
-                />
+                  className="h-full w-full object-cover"
+                  style={{ objectPosition: `${project.coverPositionX}% ${project.coverPositionY}%` }}
+                />}
               </div>
               <div className="flex flex-col gap-6 border-b border-slate-200 bg-white px-5 py-6 sm:flex-row sm:items-end sm:justify-between sm:px-8">
                 <div>

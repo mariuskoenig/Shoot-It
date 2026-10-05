@@ -466,7 +466,7 @@ export function SelectionContent({
                   className="h-8 text-red-600 hover:text-red-700 hover:bg-red-50"
                   onClick={handleDeleteSelected}
                 >
-                  <Trash2 className="h-4 w-4" />
+                  <Trash2 className="h-4 w-4 mr-2" />{t("coverControls.deleteSelected")}
                 </Button>
 
                 {showFolders && (

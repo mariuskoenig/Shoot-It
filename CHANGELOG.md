@@ -1,3 +1,14 @@
+# 1.22.0+pottsblitz.20261005
+
+### Added
+- Owner controls to remove a project cover and save its focal position with touch/mouse dragging or sliders.
+- Owner bulk deletion in result galleries, with validation and confirmation.
+- Additive project cover settings migration; existing covers remain centered.
+
+### Changed
+- Selection bulk deletion has a visible text label.
+- Removed covers stay hidden across project overview, dashboard and public overview; source images remain intact.
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
