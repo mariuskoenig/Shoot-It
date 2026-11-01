@@ -1,20 +1,26 @@
-# 1.22.0+pottsblitz.20261005
-
-### Added
-- Owner controls to remove a project cover and save its focal position with touch/mouse dragging or sliders.
-- Owner bulk deletion in result galleries, with validation and confirmation.
-- Additive project cover settings migration; existing covers remain centered.
-
-### Changed
-- Selection bulk deletion has a visible text label.
-- Removed covers stay hidden across project overview, dashboard and public overview; source images remain intact.
-
 # Changelog
 
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.22.0] - 2026-11-01
+
+### Added
+- Project cover removal and positioning with mouse/touch controls and sliders.
+- Validated owner-only bulk deletion in result galleries.
+- Dedicated public selection/results pages and dashboard storage overview.
+
+### Changed
+- Show complete images and reuse existing WebP previews throughout galleries and lightboxes.
+- Keep original-image downloads available on iPhone and iPad.
+- Integrate PR #26 with the dependency updates from PR #24.
+
+### Fixed
+- Redirect authenticated users to the dashboard or a validated local return path.
+- Preserve EXIF orientation for new uploads and local-media previews.
+- Update legacy migration test fixtures for the additive cover columns and verify preserved project data/defaults.
 
 ## [1.21.2+pottsblitz.20261005] - 2026-10-05
 
@@ -52,6 +58,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Refresh compatible transitive brace-expansion and browser mapping dependencies.
 - Dashboard project delete controls are shown only for project owners.
 - Deployment preserves the existing PostgreSQL 18 parent mount explicitly through POSTGRES_VOLUME_TARGET; the custom image is pinned and automatic updates remain disabled.
+
+## [1.21.2] - 2026-11-01
+
+### Fixed
+- Keep Nodemailer on the current Auth.js-compatible 8.x release so dependency installation succeeds without peer-dependency bypasses.
+
+## [1.21.1] - 2026-11-01
+
+### Changed
+- Updated application and transitive dependencies from PR #24, including Next.js, Nodemailer, sharp and the Prisma migration CLI.
 
 ## [1.21.0] - 2026-10-01
 
